@@ -44,53 +44,53 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-//private key tak boleh guna for now
-  Future<void> onClickShell() async {
-    var client = new SSHClient(
-      host: "192.168.8.102",
-      port: 22,
-      username: "hakim",
-      passwordOrKey: {
-        "privateKey": """-----BEGIN RSA PRIVATE KEY-----
-AAAAB3NzaC1yc2EAAAABJQAAAQEA3WoHFYtAv/pgA0VRxsroIy4VzRK0+SGRvCNh
-MwMvuLHLVkrNPnKW0HyPup8ygxFXXIsREM5ZzsiIh0qe3NwX82oT3HMyt+Ef4Aej
-rk+QW/PBLbDERZ36EaLd+8pFLn2MxM6p1asGVrwgAUmndoyYDmUJba38xGKU/+EC
-ZMpVYn3eV+/IvuwX+m5TMvQyNeug1VXRGpoHi7EjCKnET1xG0QKX0gHtUXKlAGAT
-9esidEnOMvv5L52BMxkRvyUrgd6IO3FmCaiRKFc0T12ZdGh5RemdztcGB3rgcqvS
-VhpY85fOcDVFBQTvnxKpgxKJccXusVyhJ1hMxB9wZU9dogAk6w==
------END RSA PRIVATE KEY-----""",
-      },
-    );
+  //private key tak boleh guna for now
+//   Future<void> onClickShell() async {
+//     var client = new SSHClient(
+//       host: "192.168.8.102",
+//       port: 22,
+//       username: "hakim",
+//       passwordOrKey: {
+//         "privateKey": """-----BEGIN RSA PRIVATE KEY-----
+// AAAAB3NzaC1yc2EAAAABJQAAAQEA3WoHFYtAv/pgA0VRxsroIy4VzRK0+SGRvCNh
+// MwMvuLHLVkrNPnKW0HyPup8ygxFXXIsREM5ZzsiIh0qe3NwX82oT3HMyt+Ef4Aej
+// rk+QW/PBLbDERZ36EaLd+8pFLn2MxM6p1asGVrwgAUmndoyYDmUJba38xGKU/+EC
+// ZMpVYn3eV+/IvuwX+m5TMvQyNeug1VXRGpoHi7EjCKnET1xG0QKX0gHtUXKlAGAT
+// 9esidEnOMvv5L52BMxkRvyUrgd6IO3FmCaiRKFc0T12ZdGh5RemdztcGB3rgcqvS
+// VhpY85fOcDVFBQTvnxKpgxKJccXusVyhJ1hMxB9wZU9dogAk6w==
+// -----END RSA PRIVATE KEY-----""",
+//       },
+//     );
 
-    setState(() {
-      _result = "";
-      _array = null;
-    });
+//     setState(() {
+//       _result = "";
+//       _array = null;
+//     });
 
-    try {
-      String result = await client.connect();
-      if (result == "session_connected") {
-        result = await client.startShell(
-            ptyType: "xterm",
-            callback: (dynamic res) {
-              setState(() {
-                _result += res;
-              });
-            });
+//     try {
+//       String result = await client.connect();
+//       if (result == "session_connected") {
+//         result = await client.startShell(
+//             ptyType: "xterm",
+//             callback: (dynamic res) {
+//               setState(() {
+//                 _result += res;
+//               });
+//             });
 
-        if (result == "shell_started") {
-          print(await client.writeToShell("echo hello > world\n"));
-          print(await client.writeToShell("cat world\n"));
-          new Future.delayed(
-            const Duration(seconds: 5),
-            () async => await client.closeShell(),
-          );
-        }
-      }
-    } on PlatformException catch (e) {
-      print('Error: ${e.code}\nError Message: ${e.message}');
-    }
-  }
+//         if (result == "shell_started") {
+//           print(await client.writeToShell("echo hello > world\n"));
+//           print(await client.writeToShell("cat world\n"));
+//           new Future.delayed(
+//             const Duration(seconds: 5),
+//             () async => await client.closeShell(),
+//           );
+//         }
+//       }
+//     } on PlatformException catch (e) {
+//       print('Error: ${e.code}\nError Message: ${e.message}');
+//     }
+//   }
 
   Future<void> onClickSFTP() async {
     var client = new SSHClient(
@@ -165,14 +165,14 @@ VhpY85fOcDVFBQTvnxKpgxKJccXusVyhJ1hMxB9wZU9dogAk6w==
               onPressed: onClickCmd,
               color: Colors.blue,
             ),
-            FlatButton(
-              child: Text(
-                'Test shell',
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: onClickShell,
-              color: Colors.blue,
-            ),
+            //FlatButton(
+            //child: Text(
+            // 'Test shell',
+            //  style: TextStyle(color: Colors.white),
+            // ),
+            //  onPressed: onClickShell,
+            //  color: Colors.blue,
+            //),
             FlatButton(
               child: Text(
                 'Test SFTP',
